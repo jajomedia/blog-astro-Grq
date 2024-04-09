@@ -1,0 +1,53 @@
+---
+//import { type CollectionEntry, getCollection } from 'astro:content';
+import BlogPost from '../../layouts/BlogPost.astro';
+//const { post } = Astro.props;
+
+const response = await fetch("https://jajomedia.com/astro/graphql",
+  {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      query: `
+	  {
+  post(id: "${Astro.params.slug}", idType: SLUG) {
+    id
+    databaseId
+    title
+    uri
+	slug
+	date
+	content
+	categories {
+        nodes {
+          name
+          uri
+        }
+      }
+	featuredImage {
+        node {
+          srcSet
+          sourceUrl
+          altText
+          mediaDetails {
+            height
+            width
+          }
+        }
+      }
+  }
+}
+      `,
+    }),
+  });
+
+const postData = await response.json();
+//const { film } = json.data;
+console.log("posts", postData);
+
+---
+
+<BlogPost {...postData.data.post}>
+	
+	<p set:html={postData.data.post.content}></p>
+</BlogPost>
