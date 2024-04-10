@@ -1,4 +1,4 @@
-# Astro Starter Kit: Blog Add Graphql
+# Astro Starter Kit: Blog Add GraphQL
 
 
 

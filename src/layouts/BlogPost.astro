@@ -7,7 +7,9 @@ import FormattedDate from '../components/FormattedDate.astro';
 
 //type Props = CollectionEntry<'blog'>['data'];
 
-const { title, date, description, sourceUrl, featuredImage, categories,  postData, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, date, modified, description, sourceUrl, featuredImage, categories,  postData, pubDate, updatedDate, heroImage } = Astro.props;
+const dateValue = new Date(date);
+const modifiedDateValue = new Date(modified)
 ---
 
 <html lang="en">
@@ -47,6 +49,7 @@ const { title, date, description, sourceUrl, featuredImage, categories,  postDat
 			.date {
 				margin-bottom: 0.5em;
 				color: rgb(var(--gray));
+				font-size: .75rem;
 			}
 			.last-updated-on {
 				font-style: italic;
@@ -66,15 +69,14 @@ const { title, date, description, sourceUrl, featuredImage, categories,  postDat
 				<div class="prose">
 					<div class="title">
 						<div class="date">
-							{date}
-							<!-- <FormattedDate date={pubDate} />
+							<FormattedDate date={dateValue} />
 							{
-								updatedDate && (
+								modifiedDateValue && (
 									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
+										Last updated on <FormattedDate date={modifiedDateValue} />
 									</div>
 								)
-							} -->
+							}
 						</div>
 						<h1>{title}</h1>
 						<!-- <p set:html={content}></p> -->
@@ -83,6 +85,8 @@ const { title, date, description, sourceUrl, featuredImage, categories,  postDat
 <!-- 						{ categories.nodes.map(category => {
 							return (<a class='categories' href={`${category.uri}`}>{category.name}</a>)
 						})} -->
+
+						<a class="btn-primary" href="/blog">Volver al Blog</a>
 					</div>
 					<!-- El slot es la informacion interna - single-page del blog( todos los articulos) -->
 				</div>
