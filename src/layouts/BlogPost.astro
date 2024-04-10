@@ -69,11 +69,12 @@ const modifiedDateValue = new Date(modified)
 				<div class="prose">
 					<div class="title">
 						<div class="date">
+							<!-- <span><time datetime={date}>{new Date(date).toLocaleDateString()}</time></span> -->
 							<FormattedDate date={dateValue} />
 							{
 								modifiedDateValue && (
 									<div class="last-updated-on">
-										Last updated on <FormattedDate date={modifiedDateValue} />
+										Ultima modificación <FormattedDate date={modifiedDateValue} />
 									</div>
 								)
 							}
